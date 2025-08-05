@@ -1,0 +1,18 @@
+---
+- name: Mettre à jour le site avec la dernière image Docker
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Récupérer la dernière version de l’image depuis Docker Hub
+      ansible.builtin.shell: docker pull nolanapprenti/mon-site:latest
+
+    - name: Supprimer l’ancien conteneur (s’il existe)
+      ansible.builtin.shell: docker rm -f mon-site-web || true
+
+    - name: Redéployer le conteneur avec la nouvelle image
+      ansible.builtin.shell: |
+        docker run -d \
+          --name mon-site-web \
+          -p 8080:80 \
+          nolanapprenti/mon-site:latest
