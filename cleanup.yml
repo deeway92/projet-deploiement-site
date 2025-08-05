@@ -1,0 +1,16 @@
+- name: Nettoyage de l’environnement Docker sur la VM
+  hosts: web
+  become: true
+
+  tasks:
+    - name: Arrêter et supprimer les conteneurs Docker + volumes
+      command: docker compose down --volumes
+      args:
+        chdir: /home/nolan/mon-site
+      ignore_errors: true
+
+    - name: Supprimer le dossier de déploiement (mon-site)
+      file:
+        path: /home/nolan/mon-site
+        state: absent
+      ignore_errors: true

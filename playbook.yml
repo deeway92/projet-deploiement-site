@@ -1,0 +1,55 @@
+- name: Déploiement du site statique
+  hosts: web
+  become: true
+
+  tasks:
+    - name: Supprimer containerd s’il existe (prévention de conflit avec Docker)
+      apt:
+        name: containerd
+        state: absent
+      ignore_errors: true
+
+    - name: Installer Docker via le script officiel (si absent)
+      shell: |
+        curl -fsSL https://get.docker.com -o get-docker.sh
+        sh get-docker.sh
+      args:
+        creates: /usr/bin/docker
+
+    - name: Installer Docker Compose (si absent)
+      apt:
+        name: docker-compose
+        state: present
+        update_cache: true
+
+    - name: Créer le dossier de déploiement sur la VM
+      file:
+        path: /home/nolan/mon-site
+        state: directory
+        mode: 0755
+
+    - name: Copier les fichiers du site (HTML/CSS)
+      copy:
+        src: site/
+        dest: /home/nolan/mon-site/site/
+        owner: nolan
+        group: nolan
+        mode: 0755
+
+    - name: Copier le fichier docker-compose.yml
+      copy:
+        src: docker-compose.yml
+        dest: /home/nolan/mon-site/docker-compose.yml
+        owner: nolan
+        group: nolan
+        mode: 0644
+
+    - name: Rebuilder l'image Docker sans cache
+      command: docker compose build --no-cache
+      args:
+        chdir: /home/nolan/mon-site
+
+    - name: Lancer le conteneur en détaché
+      command: docker compose up -d
+      args:
+        chdir: /home/nolan/mon-site
