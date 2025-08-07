@@ -1,16 +1,58 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon site DevOps</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon Portfolio DevOps</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Nolan Le Goat vous souhaite - Bienvenue sur mon site 🚀 🚀 Déploiement automatique via GitHub Actions !!!!!</h1>
-        <p>Ce site a été déployé automatiquement avec <strong>Docker</strong> et <strong>Ansible</strong>.</p>
-        <p>Powered by <span class="tech">Nginx</span> dans un conteneur Docker 🐳</p>
+  <!-- Header -->
+  <header class="site-header">
+    <h1>Mon Portfolio DevOps</h1>
+    <p>Présentation de mes projets Docker et Kubernetes</p>
+  </header>
+
+  <!-- Section À propos -->
+  <section id="about" class="section-container">
+    <h2>À propos de moi</h2>
+    <p>Passionné par l'infrastructure et l'automatisation, je débute en Docker et Kubernetes.</p>
+  </section>
+
+  <!-- Section Projets -->
+  <section id="projects" class="section-container">
+    <h2>Mes Projets (3)</h2>
+    <div class="projects-grid">
+      <!-- Projet 1 -->
+      <article class="project-card">
+        <h3>1. Hello Docker</h3>
+        <p>Création d'une image Docker basique affichant "Hello World".</p>
+        <a href="projects/hello-docker/" target="_blank">Voir le code</a>
+      </article>
+
+      <!-- Projet 2 -->
+      <article class="project-card">
+        <h3>2. Multi-Container avec Docker Compose</h3>
+        <p>Déploiement d'une application web + base de données avec <code>docker-compose.yml</code>.</p>
+        <a href="projects/docker-compose-app/" target="_blank">Voir le code</a>
+      </article>
+
+      <!-- Projet 3 -->
+      <article class="project-card">
+        <h3>3. Déploiement Kubernetes</h3>
+        <p>Containerisation d'une application et déploiement dans un cluster local avec <code>kubectl</code>.</p>
+        <a href="projects/k8s-deployment/" target="_blank">Voir le code</a>
+      </article>
     </div>
+  </section>
+
+  <!-- Contact -->
+  <footer class="site-footer">
+    <p>&copy; 2025 Mon Nom. Tous droits réservés.</p>
+    <ul class="social-links">
+      <li><a href="#">GitHub</a></li>
+      <li><a href="#">LinkedIn</a></li>
+    </ul>
+  </footer>
 </body>
 </html>
